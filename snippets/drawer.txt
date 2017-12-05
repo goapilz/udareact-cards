@@ -1,0 +1,37 @@
+import {View, Text, TouchableOpacity} from 'react-native'
+import { DrawerNavigator } from 'react-navigation';
+
+const Home = ({ navigation }) => (
+    <View>
+        <Text>This is the Home view</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+            <Text>Press here to open the drawer!</Text>
+        </TouchableOpacity>
+    </View>
+)
+
+const Dashboard = ({ navigation }) => (
+    <View>
+        <Text>This is the Dashboard view</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('DrawerOpen')}>
+            <Text>Press here to open the drawer!</Text>
+        </TouchableOpacity>
+    </View>
+)
+
+const Drawer = DrawerNavigator({
+    Home: {
+        screen: Home
+    },
+    Dashboard: {
+        screen: Dashboard
+    }
+})
+
+export default class App extends React.Component {
+    render() {
+        return (
+            <Drawer />
+        )
+    }
+}

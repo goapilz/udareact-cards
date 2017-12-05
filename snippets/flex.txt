@@ -1,0 +1,60 @@
+flex general:
+
+flex: 1,
+
+flexDirection: 'row',
+flexDirection: 'column',
+
+justifyContent: 'flex-start',
+justifyContent: 'center',
+justifyContent: 'flex-end',
+justifyContent: 'space-around',
+justifyContent: 'space-between',
+
+alignItems: 'flex-start',
+alignItems: 'center',
+alignItems: 'flex-end',
+alignItems: 'stretch',
+
+flexWrap: 'wrap'   (when using this alignItems has no effect)
+
+Per item things can be overwritten
+<View style={[styles.box, {flex: 1}]}/>
+<View style={[styles.box, {flex: 2}]}/>
+<View style={[styles.box, {flex: 2, alignSelf: 'flex-end'}]}/>
+
+
+
+in css:
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+  /* etc. */
+}
+
+
+box-sizing: border-box;
+position: relative;
+align-items: stretch;
+flex-shrink: 0;
+align-content: flex-start;
+border: 0 solid black;
+margin: 0;
+padding: 0;
+min-width: 0;
+
+
+import React from 'react';
+import { View } from 'react-native';
+
+const FlexDemo = props => (
+    <View style={{flex: 1}}>
+        <View style={{flex: 1, backgroundColor: 'red'}} />
+        <View style={{flex: 2, backgroundColor: 'green'}} />
+        <View style={{flex: 2, backgroundColor: 'blue'}} />
+    </View>
+);
+
+export default FlexDemo;

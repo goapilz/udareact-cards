@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "sdkVersion": "20.0.0",
+    "orientation": "portrait",
+    "name": "UdaciCards",
+    "description": "The best quiz game ever",
+    "slug": "udacicards",
+    "version": "1.0",
+    "icon": "icons/frag-die-maus-512.png",
+    "notification": {
+      "icon": "icons/frag-die-maus-45.png",
+    },
+    "ios": {
+      "bundleIdentifier": "org.udacicards.exp"
+    },
+    "android": {
+      "package": "org.udacicards.exp"
+    }
+  }
+}
