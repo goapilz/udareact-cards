@@ -1,33 +1,18 @@
 import React from 'react'
-import {View,Text, StyleSheet, Platform, StatusBar} from 'react-native'
+import {View, Text, StyleSheet, Platform, StatusBar} from 'react-native'
 import styled from 'styled-components/native'
-import reducer from './reducers'
+import reducers from './reducers'
 import {TabNavigator} from 'react-navigation'
+import AddDeck from './components/AddDeck'
+import DeckOverview from './components/DeckOverview'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
+import {purple, white} from './constants/colors'
+import {FontAwesome, Ionicons} from '@expo/vector-icons'
+import {Constants} from 'expo'
 
-const CenterView = styled.View`
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    background: #aaa;
-`
 
-const WelcomeText = styled.Text`
-    color: white;
-    font-size: 20;
-`
-
-const WelcomeBtn = styled.TouchableOpacity`
-    width: 100px;
-    height: 50px;
-    background: red;
-    border-radius: 5px;
-    align-items: center;
-    justify-content: center;
-`
-
-function StatusBar({backgroundColor, ...props}) {
+function CustomStatusBar({backgroundColor, ...props}) {
     return (
         <View style={{backgroundColor, height: Constants.statusBarHeight}}>
             <StatusBar translucent backgroundColor={backgroundColor} {...props} />
@@ -35,27 +20,20 @@ function StatusBar({backgroundColor, ...props}) {
     )
 }
 
-const Tabs = TabNavigator({
-    History: {
-        screen: History,
+const MainNavigator = TabNavigator({
+    DeckOverview: {
+        screen: DeckOverview,
         navigationOptions: {
-            tabBarLabel: 'History',
+            tabBarLabel: 'Decks',
             tabBarIcon: ({tintColor}) => <Ionicons name='ios-bookmarks' size={30} color={tintColor}/>
         },
     },
-    AddEntry: {
-        screen: AddEntry,
+    AddDeck: {
+        screen: AddDeck,
         navigationOptions: {
-            tabBarLabel: 'Add Entry',
+            tabBarLabel: 'Add Deck',
             tabBarIcon: ({tintColor}) => <FontAwesome name='plus-square' size={30} color={tintColor}/>
         },
-    },
-    Live: {
-        screen: Live,
-        navigationOptions: {
-            tabBarLabel: 'Live',
-            tabBarIcon: ({tintColor}) => <Ionicons name='ios-speedometer' size={30} color={tintColor}/>
-        }
     }
 }, {
     navigationOptions: {
@@ -80,9 +58,9 @@ const Tabs = TabNavigator({
 export default class App extends React.Component {
     render() {
         return (
-            <Provider store={createStore(reducer)}>
+            <Provider store={createStore(reducers)}>
                 <View style={{flex: 1}}>
-                    <UdaciStatusBar backgroundColor={purple} barStyle="light-content"/>
+                    <CustomStatusBar backgroundColor={purple} barStyle="light-content"/>
                     <MainNavigator/>
                 </View>
             </Provider>
