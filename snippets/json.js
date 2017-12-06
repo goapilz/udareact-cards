@@ -23,6 +23,14 @@ const newData = keys.map((key) => {
 })
 console.log(newData)
 
+const emptyObject = {} // or new Object()
+const newData2 = keys.reduce((mainObject, key) => {
+  mainObject[key] = data2[key].data
+  return mainObject
+}, emptyObject)
+console.log(newData2)
+
+
 const data3 = {...data2}
 delete data3['key3']
 console.log(data3)
