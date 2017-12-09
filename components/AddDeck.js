@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
         height: 40,
         margin: 10,
         marginTop: 40,
-        marginBottom: 20,
         width: '100%',
         fontSize: 20
     },
@@ -37,6 +36,12 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginLeft: 10,
         fontSize: 30
+    },
+    textSmall: {
+        marginRight: 10,
+        marginLeft: 10,
+        fontSize: 10,
+        marginBottom: 20
     }
 })
 
@@ -74,6 +79,7 @@ class AddDeck extends React.Component {
                 <TextInput style={styles.input}
                            onChangeText={(deckName) => this.setState({deckName})}
                            value={this.state.deckName}/>
+                <Text style={styles.textSmall}>Title:</Text>
                 <View style={{flexDirection: 'row', alignItems: 'stretch', justifyContent: 'center'}}><TouchableOpacity
                     style={styles.btn}
                     onPress={() => this.addDeck()}><Text style={styles.btnText}>Add</Text></TouchableOpacity>

@@ -52,17 +52,16 @@ class DeckDetails extends React.Component {
     }
 
     navigateAddCard(deckId) {
-        this.props.navigation.navigate('AddCard', {deckId})
+        // hack to update this view when coming back from Add Card
+        this.props.navigation.navigate('AddCard', {deckId, doForceUpdate: () => {this.forceUpdate()}})
     }
 
     deleteDeck(deckId) {
         const {deck, goBack, deleteDeck} = this.props
         Alert.alert(
             `Delete Deck ${deck.title} ?`, '',
-            [
-                {text: 'Cancel', onPress: () => {}, style: 'cancel'},
-                {text: 'OK', onPress: () => deleteDeck(deckId).then(goBack)},
-            ],
+            [{text: 'Cancel', onPress: () => {}, style: 'cancel'},
+             {text: 'OK', onPress: () => deleteDeck(deckId).then(goBack)}],
             {cancelable: true, onDismiss: () => {}}
         )
     }
