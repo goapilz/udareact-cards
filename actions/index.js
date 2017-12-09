@@ -1,4 +1,4 @@
-import * as db from '../storage/localdb'
+import * as db from '../store/localdb'
 
 export const SET_DECKS = 'SET_DECKS'
 export const ADD_OR_UPDATE_DECK = 'ADD_OR_UPDATE_DECK'

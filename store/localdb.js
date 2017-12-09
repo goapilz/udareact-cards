@@ -31,6 +31,7 @@ export function readDecks() {
     return AsyncStorage.getItem(DATA_STORAGE_KEY).then((results) => {
         let data = JSON.parse(results)
         if (!data) {
+            console.log('init with dummy data')
             data = initialDecks
             const tempJSONString = JSON.stringify(data)
             AsyncStorage.setItem(DATA_STORAGE_KEY, tempJSONString)

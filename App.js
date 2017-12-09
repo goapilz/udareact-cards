@@ -5,7 +5,7 @@ import {TabNavigator} from 'react-navigation'
 import AddDeck from './components/AddDeck'
 import DeckOverview from './components/DeckOverview'
 import {Provider} from 'react-redux'
-import {purple, white} from './constants/colors'
+import {purple, gray, white} from './constants/colors'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import {Constants} from 'expo'
 import configureStore from './store/configureStore';
@@ -23,14 +23,14 @@ const MainNavigator = TabNavigator({
         screen: DeckOverview,
         navigationOptions: {
             tabBarLabel: 'Decks',
-            tabBarIcon: ({tintColor}) => <Ionicons name='ios-bookmarks' size={30} color={tintColor}/>
+            tabBarIcon: ({tintColor}) => <FontAwesome name='list' size={30} color={tintColor}/>
         },
     },
     AddDeck: {
         screen: AddDeck,
         navigationOptions: {
             tabBarLabel: 'Add Deck',
-            tabBarIcon: ({tintColor}) => <FontAwesome name='plus-square' size={30} color={tintColor}/>
+            tabBarIcon: ({tintColor}) => <FontAwesome name='plus' size={30} color={tintColor}/>
         },
     }
 }, {
@@ -39,9 +39,10 @@ const MainNavigator = TabNavigator({
     },
     tabBarOptions: {
         activeTintColor: Platform.OS === 'ios' ? purple : white,
+        showIcon: true,
         style: {
-            height: 56,
-            backgroundColor: Platform.OS === 'ios' ? white : purple,
+            height: 60,
+            backgroundColor: Platform.OS === 'ios' ? white : gray,
             shadowColor: 'rgba(0, 0, 0, 0.24)',
             shadowOffset: {
                 width: 0,
@@ -68,7 +69,7 @@ export default class App extends React.Component {
         return (
             <Provider store={store}>
                 <View style={{flex: 1}}>
-                    <CustomStatusBar backgroundColor={purple} barStyle="light-content"/>
+                    <CustomStatusBar backgroundColor={gray} barStyle="light-content"/>
                     <MainNavigator/>
                 </View>
             </Provider>

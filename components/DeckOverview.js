@@ -1,27 +1,38 @@
 import React, {Component} from 'react'
-import {StyleSheet, Text, ScrollView, View, AppRegistry} from 'react-native'
+import {StyleSheet, Text, ScrollView, View, Platform} from 'react-native'
 import {connect} from 'react-redux'
 import {reloadDecks} from '../actions'
+import {gray, white, orange, lightGray} from '../constants/colors'
 
 const styles = StyleSheet.create({
-    container: {
+    deckOverview: {
         flex: 1,
-        margin: 0,
-        backgroundColor: '#444',
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        flexWrap: 'wrap'
+        backgroundColor: white,
+        margin: 0
     },
-    box: {
+    deck: {
         borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: 'black',
-        width: '31%',
-        height: 120,
-        backgroundColor: '#aaa',
-        margin: '1%',
+        borderColor: gray,
+        backgroundColor: lightGray,
+        height: 100,
+        margin: '2%'
+    },
+    deckText: {
+        fontSize: 30,
+        textShadowOffset: {width: 2, height: 2},
+        paddingTop: 0,
+        padding: 10,
+        color: white
+    },
+    questionCountText: {
+        fontSize: 20,
+        textShadowOffset: {width: 2, height: 2},
+        padding: 10,
+        color: orange
     }
+
 })
+
 
 class DeckOverview extends Component {
 
@@ -39,10 +50,11 @@ class DeckOverview extends Component {
         const {decks} = this.props
         return (
             <ScrollView>
-                <View style={styles.container}>
+                <View style={styles.deckOverview}>
                     {decks.map((deck) => (
                         <View key={deck.id}
-                              style={styles.box}><Text>{deck.title}</Text><Text>{deck.questionCount}&nbsp;
+                              style={styles.deck}><Text style={styles.deckText}>{deck.title}</Text><Text
+                            style={styles.questionCountText}>{deck.questionCount}&nbsp;
                             questions</Text></View>
                     ))}
                 </View>
