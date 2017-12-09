@@ -37,8 +37,8 @@ class DeckDetails extends React.Component {
         this.props.navigation.navigate('Quiz', {deckId})
     }
 
-    navigateToAddQuestion(deckId) {
-        this.props.navigation.navigate('AddQuestion', {deckId})
+    navigateToAddCard(deckId) {
+        this.props.navigation.navigate('AddCard', {deckId})
     }
 
     render() {
@@ -52,8 +52,7 @@ class DeckDetails extends React.Component {
                 <CustomButton
                     onPress={() => this.navigateToQuiz(deckId)}><CustomText>Quiz</CustomText></CustomButton>
                 <CustomButton
-                    onPress={() => this.navigateToAddQuestion(deckId)}><CustomText>Add
-                    Question</CustomText></CustomButton>
+                    onPress={() => this.navigateToAddCard(deckId)}><CustomText>Add Card</CustomText></CustomButton>
             </CenterView>
         )
     }

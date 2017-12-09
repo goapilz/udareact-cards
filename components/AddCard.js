@@ -25,11 +25,11 @@ const CustomButton = styled.TouchableOpacity`
     justify-content: center;
 `
 
-class AddQuestion extends React.Component {
+class AddCard extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {deckId} = navigation.state.params
         return {
-            title: `Add Question to ${deckId}`
+            title: `Add Card to ${deckId}`
         }
     }
 
@@ -62,4 +62,4 @@ function mapDispatchToProps(dispatch, props) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddQuestion)
+export default connect(mapStateToProps, mapDispatchToProps)(AddCard)

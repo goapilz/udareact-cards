@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 import {TabNavigator, StackNavigator} from 'react-navigation'
 import AddDeck from './components/AddDeck'
 import DeckDetails from './components/DeckDetails'
-import AddQuestion from './components/AddQuestion'
+import AddCard from './components/AddCard'
 import Quiz from './components/Quiz'
 import DeckOverview from './components/DeckOverview'
 import {Provider} from 'react-redux'
@@ -70,8 +70,8 @@ const ActivityNavigator = StackNavigator({
             }
         }
     },
-    AddQuestion: {
-        screen: AddQuestion,
+    AddCard: {
+        screen: AddCard,
         navigationOptions: {
             headerTintColor: Platform.OS === 'ios' ? purple : white,
             headerStyle: {

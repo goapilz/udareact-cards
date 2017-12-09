@@ -54,8 +54,7 @@ class DeckOverview extends Component {
                     {decks.map((deck) => (
                         <TouchableOpacity key={deck.id}  onPress={() => this.props.navigation.navigate('DeckDetails', {deckId: deck.id}) }
                               style={styles.deck}><Text style={styles.deckText}>{deck.title}</Text><Text
-                            style={styles.questionCountText}>{deck.questionCount}&nbsp;
-                            questions</Text></TouchableOpacity>
+                            style={styles.questionCountText}>{deck.questionCount}&nbsp;{deck.questionCount === 1 ? 'Card' : 'Cards'}</Text></TouchableOpacity>
                     ))}
                 </View>
             </ScrollView>
