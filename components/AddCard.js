@@ -28,9 +28,11 @@ const CustomButton = styled.TouchableOpacity`
 class AddCard extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {deckId} = navigation.state.params
+        // no way to get the title by the id because of the static method :-(
         return {
-            title: `Add Card to ${deckId}`
+            title: `Add Card`
         }
+
     }
 
     render() {

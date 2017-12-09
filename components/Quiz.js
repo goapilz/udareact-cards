@@ -28,8 +28,9 @@ const CustomButton = styled.TouchableOpacity`
 class Quiz extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {deckId} = navigation.state.params
+        // no way to get the title by the id because of the static method :-(
         return {
-            title: `${deckId} Quiz`
+            title: `Quiz`
         }
     }
 

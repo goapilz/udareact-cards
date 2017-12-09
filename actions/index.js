@@ -42,8 +42,8 @@ export const reloadDecks = () => dispatch => (
     })
 )
 
-export const addorUpdateDeck = (deckId, deck) => dispatch => (
-    db.addOrUpdateDeck(deck, deckId).then((data) => {
+export const addOrUpdateDeck = (deckId, deck) => dispatch => (
+    db.addOrUpdateDeck(deckId, deck).then((data) => {
         dispatch(_addOrUpdateDeck(deckId, deck))
     })
 )

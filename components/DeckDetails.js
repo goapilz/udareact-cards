@@ -1,60 +1,97 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
-import styled from 'styled-components/native'
+import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native'
 import {connect} from 'react-redux'
-import {reloadDecks} from '../actions'
+import {reloadDecks, deleteDeck} from '../actions'
+import {gray, white, orange, lightGray} from '../constants/colors'
 
-const CenterView = styled.View`
-    flex: 1;
-    align-items: center;
-    justify-content: center;
-    background: #aaa;
-`
-
-const CustomText = styled.Text`
-    color: white;
-    font-size: 20;
-`
-
-const CustomButton = styled.TouchableOpacity`
-    width: 100px;
-    height: 50px;
-    background: red;
-    border-radius: 5px;
-    align-items: center;
-    justify-content: center;
-`
+const styles = StyleSheet.create({
+    view: {
+        flex: 1,
+        marginRight: 30,
+        marginLeft: 30,
+        justifyContent: 'center',
+        alignItems: 'stretch',
+    },
+    btn: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 10,
+        backgroundColor: gray,
+        borderRadius: 5
+    },
+    btnText: {
+        color: white,
+        fontSize: 20
+    },
+    input: {
+        height: 40,
+        margin: 10,
+        marginTop: 40,
+        marginBottom: 20,
+        width: '100%',
+        fontSize: 20
+    },
+    text: {
+        marginRight: 10,
+        marginLeft: 10,
+        fontSize: 20
+    }
+})
 
 class DeckDetails extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {deckId} = navigation.state.params
+        // no way to get the title by the id because of the static method :-(
         return {
-            title: `${deckId} Details`
+            title: `Details`
         }
     }
 
-    navigateToQuiz(deckId) {
+    navigateQuiz(deckId) {
         this.props.navigation.navigate('Quiz', {deckId})
     }
 
-    navigateToAddCard(deckId) {
+    navigateAddCard(deckId) {
         this.props.navigation.navigate('AddCard', {deckId})
+    }
+
+    deleteDeck(deckId) {
+        const {deck, goBack, deleteDeck} = this.props
+        Alert.alert(
+            `Delete Deck ${deck.title} ?`, '',
+            [
+                {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+                {text: 'OK', onPress: () => deleteDeck(deckId).then(goBack)},
+            ],
+            {cancelable: true, onDismiss: () => {}}
+        )
     }
 
     render() {
         const {deck, deckId} = this.props
         const {goBack} = this.props
-        return (
-            <CenterView>
-                <CustomText>Deck Details {deck.title}</CustomText>
-                <CustomButton
-                    onPress={goBack}><CustomText>Back</CustomText></CustomButton>
-                <CustomButton
-                    onPress={() => this.navigateToQuiz(deckId)}><CustomText>Quiz</CustomText></CustomButton>
-                <CustomButton
-                    onPress={() => this.navigateToAddCard(deckId)}><CustomText>Add Card</CustomText></CustomButton>
-            </CenterView>
-        )
+        if (deck) {
+            return (
+                <View style={styles.view}>
+                    <Text style={styles.text}>{deck.title} has {deck.questions.length} cards</Text>
+
+                    <TouchableOpacity style={[styles.btn, {marginTop: 40}]}
+                                      onPress={() => this.navigateAddCard(deckId)}><Text style={styles.btnText}>Add
+                        Card</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.btn, {marginTop: 20}]}
+                                      onPress={() => this.navigateQuiz(deckId)}><Text
+                        style={styles.btnText}>Start Quiz</Text></TouchableOpacity>
+
+                    <TouchableOpacity style={[styles.btn, {marginTop: 120}]} onPress={goBack}><Text
+                        style={styles.btnText}>Back</Text></TouchableOpacity>
+                    <TouchableOpacity style={[styles.btn, {marginTop: 20}]}
+                                      onPress={() => this.deleteDeck(deckId)}><Text style={styles.btnText}>Delete
+                        Deck</Text></TouchableOpacity>
+                </View>
+            )
+        } else {
+            return (<View style={styles.view}/>)
+        }
     }
 }
 
@@ -69,6 +106,7 @@ function mapStateToProps(decks, props) {
 function mapDispatchToProps(dispatch, props) {
     return {
         reloadDecks: () => dispatch(reloadDecks()),
+        deleteDeck: (deckId) => dispatch(deleteDeck(deckId)),
         goBack: () => props.navigation.goBack()
     }
 }
