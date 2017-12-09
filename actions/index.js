@@ -6,30 +6,6 @@ export const DELETE_DECK = 'DELETE_DECK'
 
 export const ADD_QUESTION = 'ADD_QUESTION'
 
-// {
-//     React: {
-//         title: 'React',
-//             questions: [
-//             {
-//                 question: 'What is React?',
-//                 answer: 'A library for managing user interfaces'
-//             },
-//             {
-//                 question: 'Where do you make Ajax requests in React?',
-//                 answer: 'The componentDidMount lifecycle event'
-//             }
-//         ]
-//     },
-//     JavaScript: {
-//         title: 'JavaScript',
-//             questions: [
-//             {
-//                 question: 'What is a closure?',
-//                 answer: 'The combination of a function and the lexical environment within which that function was declared.'
-//             }
-//         ]
-//     }
-// }
 
 export function _setDecks(decks) {
     return {
@@ -38,18 +14,18 @@ export function _setDecks(decks) {
     }
 }
 
-export function _addOrUpdateDeck(deckName, deck) {
+export function _addOrUpdateDeck(deckId, deck) {
     return {
         type: ADD_OR_UPDATE_DECK,
-        deckName,
+        deckId,
         deck
     }
 }
 
-export function _deleteDeck(deckName) {
+export function _deleteDeck(deckId) {
     return {
         type: DELETE_DECK,
-        deckName
+        deckId
     }
 }
 
@@ -62,18 +38,18 @@ export function _addQuestion(questionData) {
 
 export const reloadDecks = () => dispatch => (
     db.readDecks().then((data) => {
-        dispatch(_setDecks({data}))
+        dispatch(_setDecks(data))
     })
 )
 
-export const addorUpdateDeck = (deckName, deck) => dispatch => (
-    db.addOrUpdateDeck(deck, deckName).then((data) => {
-        dispatch(_addOrUpdateDeck(deckName, deck))
+export const addorUpdateDeck = (deckId, deck) => dispatch => (
+    db.addOrUpdateDeck(deck, deckId).then((data) => {
+        dispatch(_addOrUpdateDeck(deckId, deck))
     })
 )
 
-export const deleteDeck = (deckName) => dispatch => (
-    db.deleteDeck(deckName).then((data) => {
-        dispatch(_deleteDeck(deckName))
+export const deleteDeck = (deckId) => dispatch => (
+    db.deleteDeck(deckId).then((data) => {
+        dispatch(_deleteDeck(deckId))
     })
 )

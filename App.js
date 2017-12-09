@@ -1,16 +1,14 @@
 import React from 'react'
 import {View, Text, StyleSheet, Platform, StatusBar} from 'react-native'
 import styled from 'styled-components/native'
-import reducers from './reducers'
 import {TabNavigator} from 'react-navigation'
 import AddDeck from './components/AddDeck'
 import DeckOverview from './components/DeckOverview'
-import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import {purple, white} from './constants/colors'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import {Constants} from 'expo'
-
+import configureStore from './store/configureStore';
 
 function CustomStatusBar({backgroundColor, ...props}) {
     return (
@@ -55,10 +53,20 @@ const MainNavigator = TabNavigator({
     }
 })
 
+const store = configureStore()
+
 export default class App extends React.Component {
+
+    componentDidMount() {
+        console.log('before')
+        debugger
+        console.log('after')
+        // TODO setLocalNotification()
+    }
+
     render() {
         return (
-            <Provider store={createStore(reducers)}>
+            <Provider store={store}>
                 <View style={{flex: 1}}>
                     <CustomStatusBar backgroundColor={purple} barStyle="light-content"/>
                     <MainNavigator/>

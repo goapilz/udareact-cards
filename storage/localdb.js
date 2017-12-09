@@ -5,7 +5,7 @@ export const DATA_STORAGE_KEY = 'UdaciCards:data'
 const initialDecks = {
     React: {
         title: 'React',
-            questions: [
+        questions: [
             {
                 question: 'What is React?',
                 answer: 'A library for managing user interfaces'
@@ -18,7 +18,7 @@ const initialDecks = {
     },
     JavaScript: {
         title: 'JavaScript',
-            questions: [
+        questions: [
             {
                 question: 'What is a closure?',
                 answer: 'The combination of a function and the lexical environment within which that function was declared.'
@@ -28,27 +28,31 @@ const initialDecks = {
 }
 
 export function readDecks() {
-    return AsyncStorage.getItem(DATA_STORAGE_KEY).then((data) => {
+    return AsyncStorage.getItem(DATA_STORAGE_KEY).then((results) => {
+        let data = JSON.parse(results)
         if (!data) {
             data = initialDecks
-            AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(data))
+            const tempJSONString = JSON.stringify(data)
+            AsyncStorage.setItem(DATA_STORAGE_KEY, tempJSONString)
         }
         return data
     })
 }
 
-export function addOrUpdateDeck(deckName, deck) {
+export function addOrUpdateDeck(deckId, deck) {
     return AsyncStorage.mergeItem(DATA_STORAGE_KEY, JSON.stringify({
-        [deckName]: deck
+        [deckId]: deck
     }))
 }
 
-export function deleteDeck(deckName) {
+export function deleteDeck(deckId) {
     return AsyncStorage.getItem(DATA_STORAGE_KEY)
         .then((results) => {
             const data = JSON.parse(results)
-            data[deckName] = undefined
-            delete data[deckName]
-            AsyncStorage.setItem(DATA_STORAGE_KEY, JSON.stringify(data))
+            data[deckId] = undefined
+            delete data[deckId]
+            const tempJSONString = JSON.stringify(data)
+            AsyncStorage.setItem(DATA_STORAGE_KEY, tempJSONString)
+            return data
         })
 }

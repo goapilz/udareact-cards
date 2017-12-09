@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text, ScrollView, View, AppRegistry} from 'react-native'
+import {connect} from 'react-redux'
+import {reloadDecks} from '../actions'
 
 const styles = StyleSheet.create({
     container: {
@@ -23,19 +25,49 @@ const styles = StyleSheet.create({
 
 class DeckOverview extends Component {
 
-    render() {
-        const items = []
-        for(let i = 0; i < 50; i++){
-            items.push(<View key={i} style={styles.box}/>)
+    componentDidMount() {
+        const {decks} = this.props
+        const {reloadDecks} = this.props
+
+        // trigger reload when no data exists - try to find a better trigger ... e.g. first run of app
+        if (decks.length === 0) {
+            reloadDecks()
         }
+    }
+
+    render() {
+        const {decks} = this.props
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    {items}
+                    {decks.map((deck) => (
+                        <View key={deck.id}
+                              style={styles.box}><Text>{deck.title}</Text><Text>{deck.questionCount}&nbsp;
+                            questions</Text></View>
+                    ))}
                 </View>
             </ScrollView>
         )
     }
 }
 
-export default DeckOverview
+function mapStateToProps(decks, props) {
+    return {
+        decks: Object.keys(decks).map((tempKey) => {
+            const deck = decks[tempKey]
+            return {
+                id: tempKey,
+                title: deck.title,
+                questionCount: deck.questions.length
+            }
+        })
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        reloadDecks: () => dispatch(reloadDecks())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckOverview)
