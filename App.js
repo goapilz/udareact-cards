@@ -1,8 +1,11 @@
 import React from 'react'
 import {View, Text, StyleSheet, Platform, StatusBar} from 'react-native'
 import styled from 'styled-components/native'
-import {TabNavigator} from 'react-navigation'
+import {TabNavigator, StackNavigator} from 'react-navigation'
 import AddDeck from './components/AddDeck'
+import DeckDetails from './components/DeckDetails'
+import AddQuestion from './components/AddQuestion'
+import Quiz from './components/Quiz'
 import DeckOverview from './components/DeckOverview'
 import {Provider} from 'react-redux'
 import {purple, gray, white} from './constants/colors'
@@ -18,7 +21,7 @@ function CustomStatusBar({backgroundColor, ...props}) {
     )
 }
 
-const MainNavigator = TabNavigator({
+const MainTabNavigator = TabNavigator({
     DeckOverview: {
         screen: DeckOverview,
         navigationOptions: {
@@ -54,6 +57,39 @@ const MainNavigator = TabNavigator({
     }
 })
 
+const ActivityNavigator = StackNavigator({
+    Home: {
+        screen: MainTabNavigator
+    },
+    DeckDetails: {
+        screen: DeckDetails,
+        navigationOptions: {
+            headerTintColor: Platform.OS === 'ios' ? purple : white,
+            headerStyle: {
+                backgroundColor: Platform.OS === 'ios' ? white : gray,
+            }
+        }
+    },
+    AddQuestion: {
+        screen: AddQuestion,
+        navigationOptions: {
+            headerTintColor: Platform.OS === 'ios' ? purple : white,
+            headerStyle: {
+                backgroundColor: Platform.OS === 'ios' ? white : gray,
+            }
+        }
+    },
+    Quiz: {
+        screen: Quiz,
+        navigationOptions: {
+            headerTintColor: Platform.OS === 'ios' ? purple : white,
+            headerStyle: {
+                backgroundColor: Platform.OS === 'ios' ? white : gray,
+            }
+        }
+    }
+})
+
 const store = configureStore()
 
 export default class App extends React.Component {
@@ -70,7 +106,7 @@ export default class App extends React.Component {
             <Provider store={store}>
                 <View style={{flex: 1}}>
                     <CustomStatusBar backgroundColor={gray} barStyle="light-content"/>
-                    <MainNavigator/>
+                    <ActivityNavigator/>
                 </View>
             </Provider>
         )

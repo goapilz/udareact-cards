@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet, Text, ScrollView, View, Platform} from 'react-native'
+import {StyleSheet, Text, TouchableOpacity, ScrollView, View, Platform} from 'react-native'
 import {connect} from 'react-redux'
 import {reloadDecks} from '../actions'
 import {gray, white, orange, lightGray} from '../constants/colors'
@@ -52,10 +52,10 @@ class DeckOverview extends Component {
             <ScrollView>
                 <View style={styles.deckOverview}>
                     {decks.map((deck) => (
-                        <View key={deck.id}
+                        <TouchableOpacity key={deck.id}  onPress={() => this.props.navigation.navigate('DeckDetails', {deckId: deck.id}) }
                               style={styles.deck}><Text style={styles.deckText}>{deck.title}</Text><Text
                             style={styles.questionCountText}>{deck.questionCount}&nbsp;
-                            questions</Text></View>
+                            questions</Text></TouchableOpacity>
                     ))}
                 </View>
             </ScrollView>

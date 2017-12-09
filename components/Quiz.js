@@ -3,7 +3,6 @@ import {View, Text, StyleSheet} from 'react-native'
 import styled from 'styled-components/native'
 import {connect} from 'react-redux'
 import {reloadDecks} from '../actions'
-import {addOrUpdateDeck} from "../store/localdb";
 
 const CenterView = styled.View`
     flex: 1;
@@ -26,35 +25,40 @@ const CustomButton = styled.TouchableOpacity`
     justify-content: center;
 `
 
-class AddDeck extends React.Component {
+class Quiz extends React.Component {
+    static navigationOptions = ({navigation}) => {
+        const {deckId} = navigation.state.params
+        return {
+            title: `${deckId} Quiz`
+        }
+    }
+
     render() {
-        // use for validation
-        const {existingDeckIds} = this.props
+        const {deck} = this.props
         const {goBack} = this.props
         return (
             <CenterView>
-                <CustomText>Add Deck</CustomText>
-                <Text>Existing Id's</Text>
-                {existingDeckIds.map((deckId) => (
-                    <Text key={deckId}>{deckId}</Text>
-                ))}
+                <CustomText>{deck.title} Quiz</CustomText>
                 <CustomButton onPress={goBack}><CustomText>Back</CustomText></CustomButton>
             </CenterView>
         )
     }
 }
 
+
 function mapStateToProps(decks, props) {
+    const {deckId} = props.navigation.state.params
     return {
-        existingDeckIds: Object.keys(decks)
+        deckId,
+        deck: decks[deckId]
     }
 }
 
 function mapDispatchToProps(dispatch, props) {
     return {
-        addOrUpdateDeck: () => dispatch(addOrUpdateDeck()),
+        reloadDecks: () => dispatch(reloadDecks()),
         goBack: () => props.navigation.goBack()
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddDeck)
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz)
