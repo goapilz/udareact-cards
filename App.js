@@ -11,6 +11,7 @@ import {purple, gray, white} from './constants/colors'
 import {FontAwesome} from '@expo/vector-icons'
 import {Constants} from 'expo'
 import configureStore from './store/configureStore';
+import {setLocalNotification} from './utils/notification'
 
 function CustomStatusBar({backgroundColor, ...props}) {
     return (
@@ -94,10 +95,11 @@ const store = configureStore()
 export default class App extends React.Component {
 
     componentDidMount() {
-        console.log('before')
+        // start debugger (also available on android ?)
         debugger
-        console.log('after')
-        // TODO setLocalNotification()
+
+        // set notification
+        setLocalNotification()
     }
 
     render() {

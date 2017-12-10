@@ -2,6 +2,7 @@ import React from 'react'
 import {View, Text, Alert, TouchableOpacity, StyleSheet, Animated} from 'react-native'
 import {connect} from 'react-redux'
 import {gray, white, green, red} from '../constants/colors'
+import {clearLocalNotification, setLocalNotification} from '../utils/notification'
 
 const styles = StyleSheet.create({
     view: {
@@ -82,6 +83,11 @@ class Quiz extends React.Component {
         this.animate()
     }
 
+    updateNotification() {
+        clearLocalNotification()
+            .then(setLocalNotification)
+    }
+
     render() {
         const {deck} = this.props
         const {questionIndex, correctAnswers, showAnswer, bounceValue} = this.state
@@ -98,6 +104,8 @@ class Quiz extends React.Component {
             )
         } else if (questionIndex >= deck.questions.length) {
             terminateQuiz = true
+            // 'move' notification to next day when at least one quiz was finished
+            this.updateNotification()
             Alert.alert(
                 'Quiz finished', `${correctAnswers} correct answers (${Math.round(correctAnswers / deck.questions.length * 100)}%)`,
                 [{text: 'OK', onPress: goBack}],
