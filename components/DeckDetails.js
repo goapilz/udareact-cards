@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native'
 import {connect} from 'react-redux'
 import {deleteDeck} from '../actions'
-import {gray, white} from '../constants/colors'
+import {gray, white, red, green} from '../constants/colors'
 
 const styles = StyleSheet.create({
     view: {
@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 10,
+        height: 50,
         backgroundColor: gray,
         borderRadius: 5
     },
@@ -53,16 +54,26 @@ class DeckDetails extends React.Component {
 
     navigateAddCard(deckId) {
         // hack to update this view when coming back from Add Card
-        this.props.navigation.navigate('AddCard', {deckId, doForceUpdate: () => {this.forceUpdate()}})
+        this.props.navigation.navigate('AddCard', {
+            deckId, doForceUpdate: () => {
+                this.forceUpdate()
+            }
+        })
     }
 
     deleteDeck(deckId) {
         const {deck, goBack, deleteDeck} = this.props
         Alert.alert(
             `Delete Deck ${deck.title} ?`, '',
-            [{text: 'Cancel', onPress: () => {}, style: 'cancel'},
-             {text: 'OK', onPress: () => deleteDeck(deckId).then(goBack)}],
-            {cancelable: true, onDismiss: () => {}}
+            [{
+                text: 'Cancel', onPress: () => {
+                }, style: 'cancel'
+            },
+                {text: 'OK', onPress: () => deleteDeck(deckId).then(goBack)}],
+            {
+                cancelable: true, onDismiss: () => {
+            }
+            }
         )
     }
 
@@ -72,18 +83,21 @@ class DeckDetails extends React.Component {
         if (deck) {
             return (
                 <View style={styles.view}>
-                    <Text style={styles.text}>{deck.title} has {deck.questions.length} cards</Text>
-                    <TouchableOpacity style={[styles.btn, {marginTop: 40}]}
-                                      onPress={() => this.navigateAddCard(deckId)}><Text style={styles.btnText}>Add
-                        Card</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.btn, {marginTop: 20}]}
-                                      onPress={() => this.navigateQuiz(deckId)}><Text
-                        style={styles.btnText}>Start Quiz</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.btn, {marginTop: 120}]} onPress={goBack}><Text
-                        style={styles.btnText}>Back</Text></TouchableOpacity>
-                    <TouchableOpacity style={[styles.btn, {marginTop: 20}]}
-                                      onPress={() => this.deleteDeck(deckId)}><Text style={styles.btnText}>Delete
-                        Deck</Text></TouchableOpacity>
+                    <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'flex-start'}}>
+                        <Text style={[styles.text, {marginTop: 30}]}>{deck.title} has {deck.questions.length} cards</Text>
+                        <TouchableOpacity style={[styles.btn, {marginTop: 30}]} onPress={() => this.navigateAddCard(deckId)}>
+                            <Text style={styles.btnText}>Add Card</Text></TouchableOpacity>
+                    </View>
+                    <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'center'}}>
+                        <TouchableOpacity style={[styles.btn, {height:100, backgroundColor: green}]} onPress={() => this.navigateQuiz(deckId)}>
+                            <Text style={styles.btnText}>Start Quiz</Text></TouchableOpacity>
+                    </View>
+                    <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'flex-end'}}>
+                        <TouchableOpacity style={[styles.btn, {backgroundColor: red}]} onPress={() => this.deleteDeck(deckId)}>
+                            <Text style={styles.btnText}>Delete Deck</Text></TouchableOpacity>
+                        <TouchableOpacity style={[styles.btn, {marginTop: 60}]} onPress={goBack}>
+                            <Text style={styles.btnText}>Back</Text></TouchableOpacity>
+                    </View>
                 </View>
             )
         } else {
