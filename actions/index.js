@@ -4,9 +4,6 @@ export const SET_DECKS = 'SET_DECKS'
 export const ADD_OR_UPDATE_DECK = 'ADD_OR_UPDATE_DECK'
 export const DELETE_DECK = 'DELETE_DECK'
 
-export const ADD_QUESTION = 'ADD_QUESTION'
-
-
 export function _setDecks(decks) {
     return {
         type: SET_DECKS,
@@ -26,13 +23,6 @@ export function _deleteDeck(deckId) {
     return {
         type: DELETE_DECK,
         deckId
-    }
-}
-
-export function _addQuestion(questionData) {
-    return {
-        type: ADD_QUESTION,
-        questionData
     }
 }
 

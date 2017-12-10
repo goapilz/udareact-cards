@@ -1,9 +1,8 @@
 import React from 'react'
 import {View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView} from 'react-native'
-import styled from 'styled-components/native'
 import {connect} from 'react-redux'
 import {addOrUpdateDeck} from '../actions'
-import {gray, white, orange, lightGray} from '../constants/colors'
+import {gray, white} from '../constants/colors'
 
 const styles = StyleSheet.create({
     view: {
@@ -64,28 +63,24 @@ class AddDeck extends React.Component {
         }
         addOrUpdateDeck(newDeckId, {
             title: deckName,
-            questions: []
-        }).then(
-            this.setState({deckName: ''})
+            questions: []}
+        ).then(this.setState({deckName: ''})
         ).then(goBack)
     }
-
 
     render() {
         const {goBack} = this.props
         return (
             <KeyboardAvoidingView behavior="position" style={styles.view}>
                 <Text style={styles.text}>Add a new Deck</Text>
-                <TextInput style={styles.input}
-                           onChangeText={(deckName) => this.setState({deckName})}
-                           value={this.state.deckName}/>
+                <TextInput style={styles.input} onChangeText={(deckName) => this.setState({deckName})} value={this.state.deckName}/>
                 <Text style={styles.textSmall}>Title:</Text>
-                <View style={{flexDirection: 'row', alignItems: 'stretch', justifyContent: 'center'}}><TouchableOpacity
-                    style={styles.btn}
-                    onPress={() => this.addDeck()}><Text style={styles.btnText}>Add</Text></TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.btn}
-                        onPress={goBack}><Text style={styles.btnText}>Back</Text></TouchableOpacity></View>
+                <View style={{flexDirection: 'row', alignItems: 'stretch', justifyContent: 'center'}}>
+                    <TouchableOpacity style={styles.btn} onPress={() => this.addDeck()}>
+                        <Text style={styles.btnText}>Add</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={goBack}>
+                        <Text style={styles.btnText}>Back</Text></TouchableOpacity>
+                </View>
             </KeyboardAvoidingView>
         )
     }

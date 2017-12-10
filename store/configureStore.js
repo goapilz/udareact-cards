@@ -11,13 +11,11 @@ const logger = store => next => action => {
     return result
 }
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
 export default function configureStore(initialState) {
     return createStore(
         rootReducer,
         initialState,
-        composeEnhancers(
+        compose(
             applyMiddleware(thunk, logger)
         )
     )

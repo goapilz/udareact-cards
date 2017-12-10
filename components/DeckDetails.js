@@ -1,8 +1,8 @@
 import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native'
 import {connect} from 'react-redux'
-import {reloadDecks, deleteDeck} from '../actions'
-import {gray, white, orange, lightGray} from '../constants/colors'
+import {deleteDeck} from '../actions'
+import {gray, white} from '../constants/colors'
 
 const styles = StyleSheet.create({
     view: {
@@ -43,7 +43,7 @@ class DeckDetails extends React.Component {
         const {deckId} = navigation.state.params
         // no way to get the title by the id because of the static method :-(
         return {
-            title: `Details`
+            title: 'Details'
         }
     }
 
@@ -73,14 +73,12 @@ class DeckDetails extends React.Component {
             return (
                 <View style={styles.view}>
                     <Text style={styles.text}>{deck.title} has {deck.questions.length} cards</Text>
-
                     <TouchableOpacity style={[styles.btn, {marginTop: 40}]}
                                       onPress={() => this.navigateAddCard(deckId)}><Text style={styles.btnText}>Add
                         Card</Text></TouchableOpacity>
                     <TouchableOpacity style={[styles.btn, {marginTop: 20}]}
                                       onPress={() => this.navigateQuiz(deckId)}><Text
                         style={styles.btnText}>Start Quiz</Text></TouchableOpacity>
-
                     <TouchableOpacity style={[styles.btn, {marginTop: 120}]} onPress={goBack}><Text
                         style={styles.btnText}>Back</Text></TouchableOpacity>
                     <TouchableOpacity style={[styles.btn, {marginTop: 20}]}
@@ -104,7 +102,6 @@ function mapStateToProps(decks, props) {
 
 function mapDispatchToProps(dispatch, props) {
     return {
-        reloadDecks: () => dispatch(reloadDecks()),
         deleteDeck: (deckId) => dispatch(deleteDeck(deckId)),
         goBack: () => props.navigation.goBack()
     }

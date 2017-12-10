@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {StyleSheet, Text, TouchableOpacity, ScrollView, View, Platform} from 'react-native'
+import {StyleSheet, Text, TouchableOpacity, ScrollView, View} from 'react-native'
 import {connect} from 'react-redux'
 import {reloadDecks} from '../actions'
 import {gray, white, orange, lightGray} from '../constants/colors'
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
 
 })
 
-
 class DeckOverview extends Component {
 
     componentDidMount() {
@@ -52,9 +51,10 @@ class DeckOverview extends Component {
             <ScrollView>
                 <View style={styles.deckOverview}>
                     {decks.map((deck) => (
-                        <TouchableOpacity key={deck.id}  onPress={() => this.props.navigation.navigate('DeckDetails', {deckId: deck.id}) }
-                              style={styles.deck}><Text style={styles.deckText}>{deck.title}</Text><Text
-                            style={styles.questionCountText}>{deck.questionCount}&nbsp;{deck.questionCount === 1 ? 'Card' : 'Cards'}</Text></TouchableOpacity>
+                        <TouchableOpacity key={deck.id} style={styles.deck} onPress={() => this.props.navigation.navigate('DeckDetails', {deckId: deck.id})}>
+                            <Text style={styles.deckText}>{deck.title}</Text>
+                            <Text style={styles.questionCountText}>{deck.questionCount}&nbsp;{deck.questionCount === 1 ? 'Card' : 'Cards'}</Text>
+                        </TouchableOpacity>
                     ))}
                 </View>
             </ScrollView>
@@ -75,7 +75,7 @@ function mapStateToProps(decks, props) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, props) {
     return {
         reloadDecks: () => dispatch(reloadDecks())
     }

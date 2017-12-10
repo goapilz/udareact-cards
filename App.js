@@ -1,6 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet, Platform, StatusBar} from 'react-native'
-import styled from 'styled-components/native'
+import {View, Platform, StatusBar} from 'react-native'
 import {TabNavigator, StackNavigator} from 'react-navigation'
 import AddDeck from './components/AddDeck'
 import DeckDetails from './components/DeckDetails'
@@ -9,7 +8,7 @@ import Quiz from './components/Quiz'
 import DeckOverview from './components/DeckOverview'
 import {Provider} from 'react-redux'
 import {purple, gray, white} from './constants/colors'
-import {FontAwesome, Ionicons} from '@expo/vector-icons'
+import {FontAwesome} from '@expo/vector-icons'
 import {Constants} from 'expo'
 import configureStore from './store/configureStore';
 

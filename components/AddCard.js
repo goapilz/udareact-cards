@@ -1,9 +1,8 @@
 import React from 'react'
 import {View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView} from 'react-native'
-import styled from 'styled-components/native'
 import {connect} from 'react-redux'
 import {addOrUpdateDeck} from '../actions'
-import {gray, white, orange, lightGray} from '../constants/colors'
+import {gray, white} from '../constants/colors'
 
 const styles = StyleSheet.create({
     view: {
@@ -51,7 +50,7 @@ class AddCard extends React.Component {
         const {deckId} = navigation.state.params
         // no way to get the title by the id because of the static method :-(
         return {
-            title: `Add Card`
+            title: 'Add Card'
         }
     }
 
@@ -59,7 +58,6 @@ class AddCard extends React.Component {
         question: '',
         answer: ''
     }
-
 
     addCard() {
         const {goBack, deckId, deck, addOrUpdateDeck} = this.props
@@ -76,25 +74,20 @@ class AddCard extends React.Component {
         return (
             <KeyboardAvoidingView behavior="position" style={styles.view}>
                 <Text style={styles.text}>Add a new Question to {deck.title}</Text>
-                <TextInput style={styles.input}
-                           onChangeText={(question) => this.setState({question})}
-                           value={this.state.question}/>
+                <TextInput style={styles.input} onChangeText={(question) => this.setState({question})} value={this.state.question}/>
                 <Text style={styles.textSmall}>Question:</Text>
-                <TextInput style={styles.input}
-                           onChangeText={(answer) => this.setState({answer})}
-                           value={this.state.answer}/>
+                <TextInput style={styles.input} onChangeText={(answer) => this.setState({answer})} value={this.state.answer}/>
                 <Text style={styles.textSmall}>Answer:</Text>
-                <View style={{flexDirection: 'row', alignItems: 'stretch', justifyContent: 'center'}}><TouchableOpacity
-                    style={styles.btn}
-                    onPress={() => this.addCard()}><Text style={styles.btnText}>Add</Text></TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.btn}
-                        onPress={goBack}><Text style={styles.btnText}>Back</Text></TouchableOpacity></View>
+                <View style={{flexDirection: 'row', alignItems: 'stretch', justifyContent: 'center'}}>
+                    <TouchableOpacity style={styles.btn} onPress={() => this.addCard()}>
+                        <Text style={styles.btnText}>Add</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={goBack}>
+                        <Text style={styles.btnText}>Back</Text></TouchableOpacity>
+                </View>
             </KeyboardAvoidingView>
         )
     }
 }
-
 
 function mapStateToProps(decks, props) {
     const {deckId} = props.navigation.state.params
