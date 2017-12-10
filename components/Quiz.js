@@ -87,6 +87,10 @@ class Quiz extends React.Component {
             .then(setLocalNotification)
     }
 
+    restart() {
+        this.setState({questionIndex: 0,correctAnswers: 0,showAnswer: false})
+    }
+
     render() {
         const {deck} = this.props
         const {questionIndex, correctAnswers, showAnswer, bounceValue} = this.state
@@ -107,7 +111,8 @@ class Quiz extends React.Component {
             this.updateNotification()
             Alert.alert(
                 'Quiz finished', `${correctAnswers} correct answers (${Math.round(correctAnswers / deck.questions.length * 100)}%)`,
-                [{text: 'OK', onPress: goBack}],
+                [{text: 'OK', onPress: goBack},
+                 {text: 'Restart', onPress: () => {this.restart()}}],
                 {cancelable: true, onDismiss: goBack}
             )
         }
