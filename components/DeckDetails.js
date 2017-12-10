@@ -65,15 +65,9 @@ class DeckDetails extends React.Component {
         const {deck, goBack, deleteDeck} = this.props
         Alert.alert(
             `Delete Deck ${deck.title} ?`, '',
-            [{
-                text: 'Cancel', onPress: () => {
-                }, style: 'cancel'
-            },
-                {text: 'OK', onPress: () => deleteDeck(deckId).then(goBack)}],
-            {
-                cancelable: true, onDismiss: () => {
-            }
-            }
+            [{text: 'Cancel', onPress: () => {}, style: 'cancel'},
+             {text: 'OK', onPress: () => deleteDeck(deckId).then(goBack)}],
+            {cancelable: true, onDismiss: () => {}}
         )
     }
 

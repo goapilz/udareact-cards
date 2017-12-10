@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
         padding: 10,
         color: orange
     }
-
 })
 
 class DeckOverview extends Component {
