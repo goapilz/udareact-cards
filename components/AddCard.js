@@ -2,47 +2,7 @@ import React from 'react'
 import {View, Text, TouchableOpacity, TextInput, StyleSheet, KeyboardAvoidingView} from 'react-native'
 import {connect} from 'react-redux'
 import {addOrUpdateDeck} from '../actions'
-import {gray, white} from '../constants/colors'
-
-const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        marginRight: 30,
-        marginLeft: 30,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-    },
-    btn: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 10,
-        backgroundColor: gray,
-        borderRadius: 5
-    },
-    btnText: {
-        color: white,
-        fontSize: 20
-    },
-    input: {
-        height: 40,
-        margin: 10,
-        marginTop: 30,
-        width: '100%',
-        fontSize: 20
-    },
-    text: {
-        marginRight: 10,
-        marginLeft: 10,
-        fontSize: 30
-    },
-    textSmall: {
-        marginRight: 10,
-        marginLeft: 10,
-        fontSize: 10,
-        marginBottom: 20
-    }
-})
+import {defaultStyles as styles} from '../styles/styles'
 
 class AddCard extends React.Component {
 
@@ -60,8 +20,16 @@ class AddCard extends React.Component {
     }
 
     addCard() {
-        const {goBack, deckId, deck, addOrUpdateDeck} = this.props
+        // validation
         const {question, answer} = this.state
+        if (question.length === 0) {
+            alert('Question must not be empty !')
+        } else if (answer.length === 0) {
+            alert('Answer must not be empty !')
+        }
+
+        // add question and go to previous screen
+        const {goBack, deckId, deck, addOrUpdateDeck} = this.props
         deck.questions.push({question, answer})
         addOrUpdateDeck(deckId, deck).then(
             this.setState({question: '', answer: ''})
@@ -78,7 +46,7 @@ class AddCard extends React.Component {
                 <Text style={styles.textSmall}>Question:</Text>
                 <TextInput style={styles.input} onChangeText={(answer) => this.setState({answer})} value={this.state.answer}/>
                 <Text style={styles.textSmall}>Answer:</Text>
-                <View style={{flexDirection: 'row', alignItems: 'stretch', justifyContent: 'center'}}>
+                <View style={styles.rowView}>
                     <TouchableOpacity style={styles.btn} onPress={() => this.addCard()}>
                         <Text style={styles.btnText}>Add</Text></TouchableOpacity>
                     <TouchableOpacity style={styles.btn} onPress={goBack}>

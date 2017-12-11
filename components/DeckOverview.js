@@ -3,34 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, ScrollView, View} from 'react-native
 import {connect} from 'react-redux'
 import {reloadDecks} from '../actions'
 import {gray, white, orange, lightGray} from '../constants/colors'
-
-const styles = StyleSheet.create({
-    deckOverview: {
-        flex: 1,
-        backgroundColor: white,
-        margin: 0
-    },
-    deck: {
-        borderWidth: 1,
-        borderColor: gray,
-        backgroundColor: lightGray,
-        height: 100,
-        margin: '2%'
-    },
-    deckText: {
-        fontSize: 30,
-        textShadowOffset: {width: 2, height: 2},
-        paddingTop: 0,
-        padding: 10,
-        color: white
-    },
-    questionCountText: {
-        fontSize: 20,
-        textShadowOffset: {width: 2, height: 2},
-        padding: 10,
-        color: orange
-    }
-})
+import {deckStyles as styles} from '../styles/styles'
 
 class DeckOverview extends Component {
 

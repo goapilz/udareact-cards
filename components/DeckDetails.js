@@ -2,42 +2,8 @@ import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native'
 import {connect} from 'react-redux'
 import {deleteDeck} from '../actions'
-import {gray, white, red, green} from '../constants/colors'
-
-const styles = StyleSheet.create({
-    view: {
-        flex: 1,
-        marginRight: 30,
-        marginLeft: 30,
-        justifyContent: 'center',
-        alignItems: 'stretch',
-    },
-    btn: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 10,
-        height: 50,
-        backgroundColor: gray,
-        borderRadius: 5
-    },
-    btnText: {
-        color: white,
-        fontSize: 20
-    },
-    input: {
-        height: 40,
-        margin: 10,
-        marginTop: 40,
-        marginBottom: 20,
-        width: '100%',
-        fontSize: 20
-    },
-    text: {
-        marginRight: 10,
-        marginLeft: 10,
-        fontSize: 20
-    }
-})
+import {red, green} from '../constants/colors'
+import {defaultStyles as styles} from '../styles/styles'
 
 class DeckDetails extends React.Component {
     static navigationOptions = ({navigation}) => {
