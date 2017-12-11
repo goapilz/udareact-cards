@@ -43,19 +43,19 @@ class DeckDetails extends React.Component {
         if (deck) {
             return (
                 <View style={styles.view}>
-                    <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'flex-start'}}>
+                    <View style={styles.viewTop}>
                         <Text style={[styles.text, {marginTop: 30}]}>{deck.title} has {deck.questions.length} cards</Text>
                         <TouchableOpacity style={[styles.btn, {marginTop: 30}]} onPress={() => this.navigateAddCard(deckId)}>
                             <Text style={styles.btnText}>Add Card</Text></TouchableOpacity>
                     </View>
-                    <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'center'}}>
+                    <View style={styles.viewCenter}>
                         <TouchableOpacity style={[styles.btn, {height:100, backgroundColor: green}]} onPress={() => this.navigateQuiz(deckId)}>
                             <Text style={styles.btnText}>Start Quiz</Text></TouchableOpacity>
                     </View>
-                    <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'flex-end'}}>
+                    <View style={[styles.viewBottom,{marginBottom:40}]}>
                         <TouchableOpacity style={[styles.btn, {backgroundColor: red}]} onPress={() => this.deleteDeck(deckId)}>
                             <Text style={styles.btnText}>Delete Deck</Text></TouchableOpacity>
-                        <TouchableOpacity style={[styles.btn, {marginTop: 60}]} onPress={goBack}>
+                        <TouchableOpacity style={[styles.btn, {marginTop: 40}]} onPress={goBack}>
                             <Text style={styles.btnText}>Back</Text></TouchableOpacity>
                     </View>
                 </View>

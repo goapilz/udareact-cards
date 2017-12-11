@@ -91,20 +91,22 @@ class Quiz extends React.Component {
             const question = deck.questions[questionIndex]
             return (
                 <View style={styles.view}>
-                    <View style={{flex:1, alignItems: 'center', justifyContent: 'flex-start'}}>
+                    <View style={[styles.rowView, {marginTop: 10}]}>
                         <Text style={styles.textSmall}>Card {questionIndex + 1}/{deck.questions.length}</Text>
                         <Text style={styles.textSmall}>{correctAnswers} correct answers ({Math.round(correctAnswers / deck.questions.length * 100)}%)</Text>
-                        <Animated.Text style={[styles.text, {marginTop: 20, transform: [{scale: bounceValue}]}]}>
-                            {showAnswer ? question.answer : question.question}</Animated.Text>
                     </View>
-                    <View style={{flex:1, alignItems: 'stretch', justifyContent: 'flex-end'}}>
-                        <TouchableOpacity style={styles.btn} onPress={() => {this.toggleQuestion()}}>
+                    <View style={styles.viewCenter}>
+                        <Animated.Text style={[styles.text, {transform: [{scale: bounceValue}]}]}>
+                            {showAnswer ? question.answer : question.question}</Animated.Text>
+                        </View>
+                    <View style={styles.viewBottom}>
+                        <TouchableOpacity style={[styles.btn,{marginBottom: 60}]} onPress={() => {this.toggleQuestion()}}>
                             <Text style={styles.btnText}>Show {showAnswer ? 'question' : 'answer'}</Text></TouchableOpacity>
-                        <TouchableOpacity style={[styles.btn, {marginTop: 60, backgroundColor: green}]} onPress={() => {this.correct()}}>
+                        <TouchableOpacity style={[styles.btn, {marginBottom: 10, backgroundColor: green}]} onPress={() => {this.correct()}}>
                             <Text style={styles.btnText}>Correct</Text></TouchableOpacity>
-                        <TouchableOpacity style={[styles.btn, {marginTop: 10, backgroundColor: red}]} onPress={() => {this.incorrect()}}>
+                        <TouchableOpacity style={[styles.btn, {marginBottom: 60, backgroundColor: red}]} onPress={() => {this.incorrect()}}>
                             <Text style={styles.btnText}>Incorrect</Text></TouchableOpacity>
-                        <TouchableOpacity style={[styles.btn, {marginTop: 60}]} onPress={goBack}>
+                        <TouchableOpacity style={[styles.btn, {marginBottom: 30}]} onPress={goBack}>
                             <Text style={styles.btnText}>Back</Text></TouchableOpacity>
                     </View>
                 </View>

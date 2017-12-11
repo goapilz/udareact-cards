@@ -17,6 +17,7 @@ class AddDeck extends React.Component {
         const {deckName} = this.state
         if (deckName.length === 0) {
             alert('Deck title must not be empty !')
+            return false
         }
 
         // generate new deckId (validation is not really needed)
@@ -24,6 +25,7 @@ class AddDeck extends React.Component {
         const {existingDeckIds} = this.props
         if (existingDeckIds.includes(newDeckId)) {
             alert(`deckId ${newDeckId} still exists`)
+            return false
         }
 
         // add deck an go to deck detail view
@@ -32,7 +34,11 @@ class AddDeck extends React.Component {
             title: deckName,
             questions: []}
         ).then(this.setState({deckName: ''})
-        ).then(goBack)
+        ).then(this.navigateDeckDetails(newDeckId))
+    }
+
+    navigateDeckDetails(deckId) {
+        this.props.navigation.navigate('DeckDetails', {deckId})
     }
 
     render() {
@@ -40,12 +46,12 @@ class AddDeck extends React.Component {
         return (
             <KeyboardAvoidingView behavior="position" style={styles.view}>
                 <Text style={styles.text}>Add a new Deck</Text>
-                <TextInput style={styles.input} onChangeText={(deckName) => this.setState({deckName})} value={this.state.deckName}/>
-                <Text style={styles.textSmall}>Title:</Text>
-                <View style={styles.rowView}>
-                    <TouchableOpacity style={styles.btn} onPress={() => this.addDeck()}>
+                <TextInput style={[styles.input,{marginTop:60}]} onChangeText={(deckName) => this.setState({deckName})} value={this.state.deckName}/>
+                <Text style={styles.textSmall}>Title</Text>
+                <View style={[styles.rowView,{marginTop:60}]}>
+                    <TouchableOpacity style={[styles.btn, {flex:1}]} onPress={() => this.addDeck()}>
                         <Text style={styles.btnText}>Add</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.btn} onPress={goBack}>
+                    <TouchableOpacity style={[styles.btn, {flex:1}]} onPress={goBack}>
                         <Text style={styles.btnText}>Back</Text></TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>

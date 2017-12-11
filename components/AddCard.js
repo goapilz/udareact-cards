@@ -24,8 +24,10 @@ class AddCard extends React.Component {
         const {question, answer} = this.state
         if (question.length === 0) {
             alert('Question must not be empty !')
+            return false
         } else if (answer.length === 0) {
             alert('Answer must not be empty !')
+            return false
         }
 
         // add question and go to previous screen
@@ -41,15 +43,15 @@ class AddCard extends React.Component {
         const {goBack} = this.props
         return (
             <KeyboardAvoidingView behavior="position" style={styles.view}>
-                <Text style={styles.text}>Add a new Question to {deck.title}</Text>
-                <TextInput style={styles.input} onChangeText={(question) => this.setState({question})} value={this.state.question}/>
-                <Text style={styles.textSmall}>Question:</Text>
-                <TextInput style={styles.input} onChangeText={(answer) => this.setState({answer})} value={this.state.answer}/>
-                <Text style={styles.textSmall}>Answer:</Text>
-                <View style={styles.rowView}>
-                    <TouchableOpacity style={styles.btn} onPress={() => this.addCard()}>
+                <Text style={styles.text}>Add a new Card to {deck.title}</Text>
+                <TextInput style={[styles.input,{marginTop:60}]} onChangeText={(question) => this.setState({question})} value={this.state.question}/>
+                <Text style={styles.textSmall}>Question</Text>
+                <TextInput style={[styles.input,{marginTop:30}]} onChangeText={(answer) => this.setState({answer})} value={this.state.answer}/>
+                <Text style={styles.textSmall}>Answer</Text>
+                <View style={[styles.rowView,{marginTop:60}]}>
+                    <TouchableOpacity style={[styles.btn, {flex:1}]} onPress={() => this.addCard()}>
                         <Text style={styles.btnText}>Add</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.btn} onPress={goBack}>
+                    <TouchableOpacity style={[styles.btn, {flex:1}]} onPress={goBack}>
                         <Text style={styles.btnText}>Back</Text></TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>

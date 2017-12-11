@@ -17,13 +17,17 @@ class DeckOverview extends Component {
         }
     }
 
+    navigateDeckDetails(deckId) {
+        this.props.navigation.navigate('DeckDetails', {deckId})
+    }
+
     render() {
         const {decks} = this.props
         return (
             <ScrollView>
                 <View style={styles.deckOverview}>
                     {decks.map((deck) => (
-                        <TouchableOpacity key={deck.id} style={styles.deck} onPress={() => this.props.navigation.navigate('DeckDetails', {deckId: deck.id})}>
+                        <TouchableOpacity key={deck.id} style={styles.deck} onPress={() => this.navigateDeckDetails(deck.id)}>
                             <Text style={styles.deckText}>{deck.title}</Text>
                             <Text style={styles.questionCountText}>{deck.questionCount}&nbsp;{deck.questionCount === 1 ? 'Card' : 'Cards'}</Text>
                         </TouchableOpacity>

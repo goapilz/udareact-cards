@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native'
-import {gray, orange, white} from '../constants/colors'
+import {gray, orange, white, lightGray} from '../constants/colors'
 
 export const deckStyles = StyleSheet.create({
     deckOverview: {
@@ -8,22 +8,23 @@ export const deckStyles = StyleSheet.create({
         backgroundColor: white
     },
     deck: {
-        height: 100,
-        margin: '2%',
+        height: 90,
+        marginLeft: 8,
+        marginRight: 8,
+        marginTop: 8,
         backgroundColor: lightGray,
         borderColor: gray,
         borderWidth: 1
     },
     deckText: {
         fontSize: 30,
-        padding: 10,
-        paddingTop: 0,
+        marginLeft: 8,
         color: white,
         textShadowOffset: {width: 2, height: 2}
     },
     questionCountText: {
         fontSize: 20,
-        padding: 10,
+        margin: 8,
         color: orange,
         textShadowOffset: {width: 2, height: 2}
     }
@@ -37,29 +38,38 @@ export const defaultStyles = StyleSheet.create({
         alignItems: 'stretch',
         justifyContent: 'center'
     },
-    rowView: {
-        flexDirection: 'row', 
-        alignItems: 'stretch', 
+    viewTop: {
+        flex: 1,
+        alignItems: 'stretch',
+        justifyContent: 'flex-start'
+    },
+    viewCenter: {
+        flex: 1,
+        alignItems: 'stretch',
         justifyContent: 'center'
+    },
+    viewBottom: {
+        flex: 1,
+        alignItems: 'stretch',
+        justifyContent: 'flex-end'
+    },
+    rowView: {
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        justifyContent: 'space-between'
     },
     input: {
         height: 40,
         width: '100%',
-        margin: 10,
-        marginTop: 40,
-        fontSize: 20
+        fontSize: 20,
     },
     btn: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        margin: 10,
+        margin: 5,
+        height: 40,
         backgroundColor: gray,
         borderRadius: 5
-    },
-    btnDetailedViewAndQuizView: {
-        // no flex !
-        height: 50,
     },
     btnText: {
         fontSize: 20,
@@ -67,10 +77,11 @@ export const defaultStyles = StyleSheet.create({
     },
     text: {
         fontSize: 30,
-        margin: 10
+        textAlign: 'center'
     },
     textSmall: {
         fontSize: 12,
-        margin: 10
+        marginLeft: 4,
+        marginRight: 4,
     }
 })
