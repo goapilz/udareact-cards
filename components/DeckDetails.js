@@ -14,6 +14,10 @@ class DeckDetails extends React.Component {
         }
     }
 
+    navigateOverview() {
+        this.props.navigation.navigate('Home')
+    }
+
     navigateQuiz(deckId) {
         this.props.navigation.navigate('Quiz', {deckId})
     }
@@ -32,7 +36,7 @@ class DeckDetails extends React.Component {
         Alert.alert(
             `Delete Deck ${deck.title} ?`, '',
             [{text: 'Cancel', onPress: () => {}, style: 'cancel'},
-             {text: 'OK', onPress: () => deleteDeck(deckId).then(goBack)}],
+             {text: 'OK', onPress: () => deleteDeck(deckId).then(this.navigateOverview())}],
             {cancelable: true, onDismiss: () => {}}
         )
     }
@@ -55,7 +59,7 @@ class DeckDetails extends React.Component {
                     <View style={[styles.viewBottom,{marginBottom:40}]}>
                         <TouchableOpacity style={[styles.btn, {backgroundColor: red}]} onPress={() => this.deleteDeck(deckId)}>
                             <Text style={styles.btnText}>Delete Deck</Text></TouchableOpacity>
-                        <TouchableOpacity style={[styles.btn, {marginTop: 40}]} onPress={goBack}>
+                        <TouchableOpacity style={[styles.btn, {marginTop: 40}]} onPress={() => this.navigateOverview()}>
                             <Text style={styles.btnText}>Back</Text></TouchableOpacity>
                     </View>
                 </View>
